@@ -1,0 +1,569 @@
+/* Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
+
+/* Variables */
+:root {
+  /* Header */
+  --header-height: 3.5rem;
+
+  /* Colors */
+  --black-color: hsl(220, 24%, 12%);
+  --black-color-light: hsl(220, 24%, 15%);
+  --black-color-lighten: hsl(220, 20%, 18%);
+  --white-color: #fff;
+  --body-color: #00002e;
+
+  /* Typography */
+  --body-font: "Montserrat", sans-serif;
+  --normal-font-size: 0.938rem;
+
+  /* Font Weight */
+  --font-regular: 400;
+  --font-semi-bold: 600;
+
+  /* Z-index */
+  --z-tooltip: 10;
+  --z-fixed: 100;
+}
+
+/* Responsive typography for larger screens */
+@media screen and (min-width: 1024px) {
+  :root {
+    --normal-font-size: 1rem;
+  }
+}
+
+/* Base styles */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+/* Body styles */
+body {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  background-color: var(--body-color);
+}
+
+/* List styles */
+ul {
+  list-style: none;
+}
+
+/* Anchor styles */
+a {
+  text-decoration: none;
+}
+
+/* Container class for consistent max-width */
+.container {
+  max-width: 1120px;
+  margin-inline: 1.5rem;
+}
+
+/* Header styles */
+.header {
+  /* Fixed header position */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--black-color);
+  box-shadow: 0 2px 16px hsla(220, 32%, 8%, 0.3);
+  z-index: var(--z-fixed);
+}
+
+/* Navigation styles */
+.nav {
+  height: var(--header-height);
+}
+
+/* Navigation logo and toggle */
+.nav__logo,
+.nav__burger,
+.nav__close {
+  color: var(--white-color);
+}
+
+/* Navigation data alignment */
+.nav__data {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Navigation logo styles */
+.nav__logo {
+  display: inline-flex;
+  align-items: center;
+  column-gap: 0.25rem;
+  font-weight: var(--font-semi-bold);
+  font-size: 2.5rem;
+}
+
+/* Navigation logo icon styles */
+.nav__logo i {
+  font-weight: initial;
+  font-size: 2.5rem;
+}
+
+/* Navigation toggle styles */
+.nav__toggle {
+  position: relative;
+  width: 32px;
+  height: 32px;
+}
+
+/* Navigation burger and close icon styles */
+.nav__burger,
+.nav__close {
+  position: absolute;
+  width: max-content;
+  height: max-content;
+  inset: 0;
+  margin: auto;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: opacity 0.1s, transform 0.4s;
+}
+
+/* Navigation close icon initially hidden */
+.nav__close {
+  opacity: 0;
+}
+
+/* Mobile navigation menu */
+@media screen and (max-width: 1118px) {
+  /* Navigation menu properties */
+  .nav__menu {
+    position: absolute;
+    left: 0;
+    top: 2.5rem;
+    width: 100%;
+    height: calc(100vh - 3.5rem);
+    overflow: auto;
+    pointer-events: none;
+    opacity: 0;
+    transition: top 0.4s, opacity 0.3s;
+  }
+
+  /* Hide scrollbar for navigation menu */
+  .nav__menu::-webkit-scrollbar {
+    width: 0;
+  }
+
+  /* Navigation list styles */
+  .nav__list {
+    background-color: var(--black-color);
+    padding-top: 1rem;
+  }
+}
+
+/* Navigation link styles */
+.nav__link {
+  color: var(--white-color);
+  background-color: var(--black-color);
+  font-weight: var(--font-semi-bold);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s;
+}
+
+/* Navigation link hover styles */
+.nav__link:hover {
+  background-color: var(--black-color-light);
+}
+
+/* Show menu class */
+.show-menu {
+  opacity: 1;
+  top: 3.5rem;
+  pointer-events: initial;
+}
+
+/* Show icon class */
+.show-icon .nav__burger {
+  opacity: 0;
+  transform: rotate(90deg);
+}
+.show-icon .nav__close {
+  opacity: 1;
+  transform: rotate(90deg);
+}
+
+/* Dropdown item styles */
+.dropdown__item {
+  cursor: pointer;
+}
+
+/* Dropdown arrow icon styles */
+.dropdown__arrow {
+  font-size: 1.25rem;
+  font-weight: initial;
+  transition: transform 0.4s;
+}
+
+/* Dropdown link styles */
+.dropdown__link {
+  padding: 1.25rem 1.25rem 1.25rem 2.5rem;
+  color: var(--white-color);
+  background-color: var(--black-color-light);
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+  font-weight: var(--font-semi-bold);
+  transition: background-color 0.3s;
+}
+
+/* Dropdown link icon styles */
+.dropdown__link i {
+  font-size: 1.25rem;
+  font-weight: initial;
+}
+
+/* Dropdown link hover styles */
+.dropdown__link:hover {
+  background-color: var(--black-color);
+}
+
+/* Dropdown menu and submenu styles */
+.dropdown__menu,
+.dropdown__submenu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out;
+}
+
+/* Show dropdown menu on hover */
+.dropdown__item:hover .dropdown__menu {
+  max-height: 1000px;
+  transition: max-height 0.4s ease-in;
+}
+
+/* Rotate dropdown arrow on hover */
+.dropdown__item:hover .dropdown__arrow {
+  transform: rotate(180deg);
+}
+
+/* Responsive styles for smaller devices */
+@media screen and (max-width: 340px) {
+  .container {
+    margin-inline: 1rem;
+  }
+
+  .nav__link {
+    padding-inline: 1rem;
+  }
+}
+
+/* Responsive styles for larger devices */
+@media screen and (min-width: 1118px) {
+  .container {
+    margin-inline: auto;
+  }
+
+  .nav {
+    height: calc(var(--header-height) + 2rem);
+    display: flex;
+    justify-content: space-between;
+  }
+  .nav__toggle {
+    display: none;
+  }
+  .nav__list {
+    margin-top: 1.5rem;
+    display: flex;
+    column-gap: 3rem;
+  }
+  .nav__link {
+    height: 100%;
+    padding: 0;
+    justify-content: initial;
+    column-gap: 0.25rem;
+  }
+  .nav__link:hover {
+    background-color: transparent;
+  }
+
+  .dropdown__item {
+    position: relative;
+  }
+
+  .dropdown__menu {
+    max-height: initial;
+    overflow: initial;
+    position: absolute;
+    left: 0;
+    top: 6rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, top 0.3s;
+  }
+
+  .dropdown__link {
+    padding-inline: 1rem 3.5rem;
+  }
+
+  /* Show dropdown menu */
+  .dropdown__item:hover .dropdown__menu {
+    opacity: 1;
+    top: 4.2rem;
+    pointer-events: initial;
+    transition: top 0.3s;
+  }
+}
+
+/* Hero section styles */
+.hero {
+  background-color: #00002a;
+  padding: 9rem 0 4rem 0;
+}
+
+.hero__content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hero__left {
+  flex: 1;
+  max-width: 600px;
+}
+
+.hero__heading {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  color: #e9e9ea;
+}
+
+.hero__paragraph {
+  margin-bottom: 20px;
+  color: #776a92;
+}
+
+.hero__features {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+  color: #e9e9ea;
+}
+
+.hero__feature {
+  display: flex;
+  align-items: center;
+}
+
+.hero__icon {
+  width: 30px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.hero__feature-text {
+  font-size: 1rem;
+}
+
+.hero__buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.hero__btn {
+  padding: 10px 20px;
+  background-color: #5532b9;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: var(--font-semi-bold);
+}
+.second-btn {
+  background-color: #00002a;
+  border: #fff 1px solid;
+}
+.hero__btn:hover {
+  color: #5532b9;
+  background-color: white;
+}
+
+.hero__right {
+  flex: 1;
+  max-width: 600px;
+  text-align: right;
+}
+
+.hero__right img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Responsive styles for smaller screens */
+@media screen and (max-width: 768px) {
+  .hero__content {
+    flex-direction: column;
+  }
+
+  .hero__left,
+  .hero__right {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .hero__right img {
+    margin-top: 20px;
+  }
+  .hero__right img {
+    display: none;
+  }
+}
+
+/* Custom section styles */
+.custom-section {
+  background-color: #00002a;
+  padding: 1rem 0;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+}
+.flex-container-reverse {
+  flex-direction: row-reverse;
+}
+
+.image-container {
+  flex: 1;
+  max-width: 600px;
+  padding-right: 20px; /* Add some spacing between image and text */
+  text-align: right; /* Align image to the right */
+}
+
+.section-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.text-container {
+  flex: 1;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.section-heading {
+  font-weight: bold;
+  color: #da008d;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ebebeb;
+}
+
+.section-description {
+  font-size: 1rem;
+  color: #7164a1;
+}
+
+.section-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Section button hover styles */
+.section-button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive styles for smaller screens */
+@media screen and (max-width: 768px) {
+  .flex-container {
+    flex-direction: column; /* Stack elements on small screens */
+    align-items: center;
+  }
+
+  .image-container {
+    text-align: center;
+    padding-right: 0; /* Remove spacing */
+    padding-bottom: 20px; /* Add spacing at the bottom */
+  }
+}
+
+/* Custom footer styles */
+.custom-footer {
+  background-color: #00002a;
+  padding-top: 2rem;
+}
+
+.footer-container {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.footer-column {
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.footer-heading {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #ebebeb;
+}
+
+.footer-link {
+  display: block;
+  margin-bottom: 10px;
+  color: #ebebeb;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-link:hover {
+  color: #b5b5b5;
+}
+
+.footer-icon {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+/* Responsive styles for smaller screens */
+@media screen and (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-column {
+    margin-bottom: 20px;
+    padding: 2rem;
+  }
+}
